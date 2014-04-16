@@ -1,0 +1,8 @@
+http://blog.cloudera.com/blog/2009/07/advice-on-qa-testing-your-mapreduce-jobs/
+
+http://blog.cloudera.com/blog/2009/07/debugging-mapreduce-programs-with-mrunit/
+
+http://www.infoq.com/articles/HadoopMRUnit/
+
+http://pragmaticintegrator.wordpress.com/2013/08/26/unit-testing-a-java-hadoop-job/
+
