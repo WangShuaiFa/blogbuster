@@ -22,6 +22,7 @@ public class ExampleTest {
 
     @BeforeClass
     public static void setUp() throws IOException, ParseException {
+        // TODO: load pig script properly
         test = new PigTest("src/main/resources/example.pig");
         test.override("users", "users = LOAD '" + TEST_PATH + "input/users.txt' USING PigStorage(',') AS (id:long," + "firstName:chararray," + "lastName:chararray," + "country:chararray,"
                         + "city:chararray," + "company:chararray);");

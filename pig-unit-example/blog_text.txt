@@ -1,0 +1,18 @@
+Unit testing. What is unit testing? How do we do it?
+It is well known how a unit test of a (simple) Java class looks like:
+- there is preparation part of it, something that runs before all tests and/or before each of the tests (instantiating of needed things, mocking the behavior, ...)
+- there is a real test part, a set of tests of the class, positive and negative tests
+- finally, there is a part where we reset and dispose of all the things we used during testing
+This doesn't sound that complicated or complex. But we started from a premise that we have a simple Java class. What would happen to our unit test if the Java class it tests is not a well designed Java class? Let me change our premise and make things interesting. Let me show you how a test of an Apache Pig script would look like.
+<more>
+For those who are not familiar with Apache Pig, Pig scripts are programs written in Pig Latin. This is a procedural language with a compiler that compiles scripts into Java Map/Reduce jobs. A Pig script is easier to read and understand than equal Java M/R implementation would be. Also, it is easier to maintain. These two are main benefits of the approach.
+
+I've prepared a short and simple Pig script, an awesomeness calculator, that is going to be my starting point. In next sentences, I will describe what it does, how it does it, and I will present a way how a test of it could look like.
+
+TODO:
+ - opisati sta radi Pig script
+ - opisati malo kako on to radi (objasniti sta se desava sa M/R taskom)
+ - opisati i prikazati test
+	- positive tests
+	- negative tests (faulty data, missing data, ...)
+ - zakljucak: iako se sve desava u distribuiranom okruzenju i situacija je bla bla bla komplikovana jer je to M/R, napisati test za Pig script i nije jako tesko - cak moze da bude mnogo lakse od pisanja nekog Java unit testa komplikovane klase... ili tako nesto...
