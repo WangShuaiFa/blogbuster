@@ -1,8 +1,8 @@
 -- Load users from hdfs
-users = LOAD '/some/path/users' AS (id:long, firstname:chararray, lastName:chararray, country:chararray, city:chararray, company:chararray);
+users = LOAD '/some/path/users.txt' USING PigStorage(',') AS (id:long, firstName:chararray, lastName:chararray, country:chararray, city:chararray, company:chararray);
 
 -- Load ratings from hdfs
-awesomenessRating = LOAD '/some/path/rating' AS (userId:long, rating:long);
+awesomenessRating = LOAD '/some/path/rating.txt' USING PigStorage(',') AS (userId:long, rating:long);
 
 -- Join records by userId
 joinedRecords = JOIN users BY id, awesomenessRating BY userId;
@@ -18,4 +18,5 @@ generatedRecords = FOREACH filteredRecords GENERATE
 												awesomenessRating::rating AS rating;
 
 -- Store results
-STORE generatedRecords INTO '/path' USING PigStorage();
+--STORE generatedRecords INTO '/results/awesomeness' USING PigStorage();
+DUMP generatedRecords;
