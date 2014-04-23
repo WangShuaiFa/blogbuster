@@ -6,3 +6,9 @@ http://www.infoq.com/articles/HadoopMRUnit/
 
 http://pragmaticintegrator.wordpress.com/2013/08/26/unit-testing-a-java-hadoop-job/
 
+## testing ###
+
+http://m-mansur-ashraf.blogspot.com/2013/02/testing-mapreduce-with-mrunit.html
+https://cwiki.apache.org/confluence/display/MRUNIT/MRUnit+Tutorial
+http://www.infoq.com/articles/HadoopMRUnit/
+

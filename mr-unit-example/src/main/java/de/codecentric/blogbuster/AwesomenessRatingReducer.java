@@ -33,6 +33,11 @@ public class AwesomenessRatingReducer extends Reducer<LongWritable, AwesomenessR
             }
         }
 
+        StringBuffer stringValue = prepareOutput(firstName, lastName, country, city, company, rating);
+        context.write(key, new Text(stringValue.toString()));
+    }
+
+    private StringBuffer prepareOutput(Text firstName, Text lastName, Text country, Text city, Text company, LongWritable rating) {
         StringBuffer stringValue = new StringBuffer(firstName != null ? firstName.toString() : "");
         stringValue.append("\t" + (lastName != null ? lastName.toString() : ""));
         stringValue.append("\t" + (country != null ? country.toString() : ""));
@@ -40,7 +45,6 @@ public class AwesomenessRatingReducer extends Reducer<LongWritable, AwesomenessR
         stringValue.append("\t" + (company != null ? company.toString() : ""));
         stringValue.append("\t" + (rating != null ? rating.toString() : "0"));
 
-        Text text = new Text(stringValue.toString());
-        context.write(key, text);
+        return stringValue;
     }
 }

@@ -61,6 +61,12 @@
 			<classifier>hadoop2</classifier>
 		</dependency>
 		<dependency>
+			<groupId>org.easytesting</groupId>
+			<artifactId>fest-assert</artifactId>
+			<version>1.4</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-client</artifactId>
 			<version>2.0.0-cdh4.0.1</version>
