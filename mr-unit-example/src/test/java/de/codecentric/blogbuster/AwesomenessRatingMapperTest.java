@@ -10,6 +10,8 @@ import org.fest.assertions.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.codecentric.blogbuster.data.TestDataProvider;
+
 public class AwesomenessRatingMapperTest {
 
     private MapDriver<LongWritable, Text, LongWritable, AwesomenessRatingWritable> mapDriver;
@@ -23,45 +25,27 @@ public class AwesomenessRatingMapperTest {
     // testing style: tell the input, assert the output
     @Test
     public void testWithInput() throws Exception {
-        mapDriver.withInput(new LongWritable(0L), new Text("1,Ozren,Gulan,Serbia,Novi Sad,codecentric"));
-        mapDriver.withInput(new LongWritable(1L), new Text("1,1000"));
+        mapDriver.withInput(new LongWritable(0L), TestDataProvider.USER_INFO);
+        mapDriver.withInput(new LongWritable(1L), TestDataProvider.RATING_INFO);
 
-        AwesomenessRatingWritable userInfoValue = new AwesomenessRatingWritable();
-        userInfoValue.setFirstName(new Text("Ozren"));
-        userInfoValue.setLastName(new Text("Gulan"));
-        userInfoValue.setCountry(new Text("Serbia"));
-        userInfoValue.setCity(new Text("Novi Sad"));
-        userInfoValue.setCompany(new Text("codecentric"));
-        userInfoValue.setRating(new LongWritable(0L));
-        Pair<LongWritable, AwesomenessRatingWritable> userInfoTuple = new Pair<LongWritable, AwesomenessRatingWritable>(new LongWritable(1L), userInfoValue);
-
-        AwesomenessRatingWritable ratingInfoValue = new AwesomenessRatingWritable();
-        ratingInfoValue.setRating(new LongWritable(1000L));
-        Pair<LongWritable, AwesomenessRatingWritable> ratingInfoTuple = new Pair<LongWritable, AwesomenessRatingWritable>(new LongWritable(1L), ratingInfoValue);
+        Pair<LongWritable, AwesomenessRatingWritable> userInfoTuple = new Pair<LongWritable, AwesomenessRatingWritable>(
+                        TestDataProvider.USER_ID, TestDataProvider.USER_INFO_VALUE);
+        Pair<LongWritable, AwesomenessRatingWritable> ratingInfoTuple = new Pair<LongWritable, AwesomenessRatingWritable>(
+                        TestDataProvider.USER_ID, TestDataProvider.RATING_INFO_VALUE);
 
         List<Pair<LongWritable, AwesomenessRatingWritable>> result = mapDriver.run();
+
         Assertions.assertThat(result).isNotNull().hasSize(2).contains(userInfoTuple, ratingInfoTuple);
     }
 
     // testing style: tell the input and output, let the framework do the assertions
     @Test
     public void testWithKnownInputAndOutput() throws Exception {
-        mapDriver.withInput(new LongWritable(0L), new Text("1,Ozren,Gulan,Serbia,Novi Sad,codecentric"));
-        mapDriver.withInput(new LongWritable(1L), new Text("1,1000"));
+        mapDriver.withInput(new LongWritable(0L), TestDataProvider.USER_INFO);
+        mapDriver.withInput(new LongWritable(1L), TestDataProvider.RATING_INFO);
 
-        LongWritable outputKey = new LongWritable(1L);
-        AwesomenessRatingWritable userInfoValue = new AwesomenessRatingWritable();
-        userInfoValue.setFirstName(new Text("Ozren"));
-        userInfoValue.setLastName(new Text("Gulan"));
-        userInfoValue.setCountry(new Text("Serbia"));
-        userInfoValue.setCity(new Text("Novi Sad"));
-        userInfoValue.setCompany(new Text("codecentric"));
-        userInfoValue.setRating(new LongWritable(0L));
-        mapDriver.withOutput(outputKey, userInfoValue);
-
-        AwesomenessRatingWritable ratingInfoValue = new AwesomenessRatingWritable();
-        ratingInfoValue.setRating(new LongWritable(1000L));
-        mapDriver.withOutput(outputKey, ratingInfoValue);
+        mapDriver.withOutput(TestDataProvider.USER_ID, TestDataProvider.USER_INFO_VALUE);
+        mapDriver.withOutput(TestDataProvider.USER_ID, TestDataProvider.RATING_INFO_VALUE);
 
         mapDriver.runTest();
     }

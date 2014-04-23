@@ -13,7 +13,8 @@ public class AwesomenessRatingReducer extends Reducer<LongWritable, AwesomenessR
     }
 
     @Override
-    protected void reduce(LongWritable key, Iterable<AwesomenessRatingWritable> values, Context context) throws IOException, InterruptedException {
+    protected void reduce(LongWritable key, Iterable<AwesomenessRatingWritable> values, Context context)
+                    throws IOException, InterruptedException {
         Text firstName = null;
         Text lastName = null;
         Text country = null;
@@ -33,16 +34,20 @@ public class AwesomenessRatingReducer extends Reducer<LongWritable, AwesomenessR
             }
         }
 
-        StringBuffer stringValue = prepareOutput(firstName, lastName, country, city, company, rating);
-        context.write(key, new Text(stringValue.toString()));
+        // filter out users with awesomenessRating <= 150
+        if (rating != null && rating.get() > 150L) {
+            StringBuffer stringValue = prepareOutput(firstName, lastName, country, city, company, rating);
+            context.write(key, new Text(stringValue.toString()));
+        }
     }
 
-    private StringBuffer prepareOutput(Text firstName, Text lastName, Text country, Text city, Text company, LongWritable rating) {
+    private StringBuffer prepareOutput(Text firstName, Text lastName, Text country, Text city, Text company,
+                    LongWritable rating) {
         StringBuffer stringValue = new StringBuffer(firstName != null ? firstName.toString() : "");
-        stringValue.append("\t" + (lastName != null ? lastName.toString() : ""));
+        // stringValue.append("\t" + (lastName != null ? lastName.toString() : ""));
         stringValue.append("\t" + (country != null ? country.toString() : ""));
-        stringValue.append("\t" + (city != null ? city.toString() : ""));
-        stringValue.append("\t" + (company != null ? company.toString() : ""));
+        // stringValue.append("\t" + (city != null ? city.toString() : ""));
+        // stringValue.append("\t" + (company != null ? company.toString() : ""));
         stringValue.append("\t" + (rating != null ? rating.toString() : "0"));
 
         return stringValue;
