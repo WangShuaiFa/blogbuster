@@ -31,10 +31,10 @@ public class AwesomenessRatingReducerTest {
                         TestDataProvider.RATING_INFO_VALUE);
         reduceDriver.withInput(TestDataProvider.USER_ID, values);
 
-        List<Pair<LongWritable, Text>> result = reduceDriver.run();
-
         Pair<LongWritable, Text> expectedTupple = new Pair<LongWritable, Text>(TestDataProvider.USER_ID,
                         TestDataProvider.RESULT_TUPPLE_TEXT);
+
+        List<Pair<LongWritable, Text>> result = reduceDriver.run();
 
         Assertions.assertThat(result).isNotNull().hasSize(1).containsExactly(expectedTupple);
     }

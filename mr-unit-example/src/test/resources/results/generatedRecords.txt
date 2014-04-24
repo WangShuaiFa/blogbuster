@@ -1,2 +1,0 @@
-(1,Ozren,Serbia,1000)
-(3,John,England,200)

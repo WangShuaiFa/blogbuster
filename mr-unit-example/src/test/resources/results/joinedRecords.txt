@@ -1,5 +1,0 @@
-(1,Ozren,Gulan,Serbia,Novi Sad,codecentric,1,1000)
-(2,Petar,Petrovic,Serbia,Belgrade,some.company,2,15)
-(3,John,Smith,England,London,brits.co,3,200)
-(4,Linda,Jefferson,USA,New York,ae.com,4,11)
-(5,Oscar,Hugo,Sweden,Stockholm,swe.co,5,5)
