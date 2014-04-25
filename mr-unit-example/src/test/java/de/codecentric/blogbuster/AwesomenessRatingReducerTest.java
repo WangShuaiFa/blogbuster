@@ -26,10 +26,14 @@ public class AwesomenessRatingReducerTest {
 
     // testing style: tell the input, assert the output
     @Test
-    public void testWithInput() throws Exception {
+    public void testReducerWithManualAssertions() throws Exception {
         ImmutableList<AwesomenessRatingWritable> values = ImmutableList.of(TestDataProvider.USER_INFO_VALUE,
                         TestDataProvider.RATING_INFO_VALUE);
+        ImmutableList<AwesomenessRatingWritable> valuesFilteredOut = ImmutableList.of(
+                        TestDataProvider.USER_INFO_VALUE_FILTERED_OUT, TestDataProvider.RATING_INFO_VALUE_FILTERED_OUT);
+
         reduceDriver.withInput(TestDataProvider.USER_ID, values);
+        reduceDriver.withInput(TestDataProvider.USER_ID_FILTERED_OUT, valuesFilteredOut);
 
         Pair<LongWritable, Text> expectedTupple = new Pair<LongWritable, Text>(TestDataProvider.USER_ID,
                         TestDataProvider.RESULT_TUPPLE_TEXT);
@@ -41,10 +45,14 @@ public class AwesomenessRatingReducerTest {
 
     // testing style: tell the input and output, let the framework do the assertions
     @Test
-    public void testWithInputAndOutput() throws Exception {
+    public void testReducerWithAutoAssertions() throws Exception {
         ImmutableList<AwesomenessRatingWritable> values = ImmutableList.of(TestDataProvider.USER_INFO_VALUE,
                         TestDataProvider.RATING_INFO_VALUE);
+        ImmutableList<AwesomenessRatingWritable> valuesFilteredOut = ImmutableList.of(
+                        TestDataProvider.USER_INFO_VALUE_FILTERED_OUT, TestDataProvider.RATING_INFO_VALUE_FILTERED_OUT);
+
         reduceDriver.withInput(TestDataProvider.USER_ID, values);
+        reduceDriver.withInput(TestDataProvider.USER_ID_FILTERED_OUT, valuesFilteredOut);
 
         reduceDriver.withOutput(new Pair<LongWritable, Text>(TestDataProvider.USER_ID,
                         TestDataProvider.RESULT_TUPPLE_TEXT));

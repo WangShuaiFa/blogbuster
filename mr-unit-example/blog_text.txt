@@ -1,0 +1,159 @@
+
+In one of the previous posts on our blog#link, my colleague gave us a nice example how to test a map/reduce job. A starting point was the implementation of it which was done using Apache Pig. I would like to extend his example in this post by adding a little twist to it. Map/reduce job I am going to test will be the same he used but implemented in Java.
+Multi-threaded environment can be a hostile place to dwell in and debugging and testing it is not easy. With map/reduce things get even more complex. These jobs run in distributed fashion, across many JVMs in a cluster of machines. That is why it is important to use all the power of unit testing and run them as isolated as possible.
+My colleague used PigUnit for testing his pig script. I am going to use MRUnit - a Java library written to help with unit testing map/reduce jobs.
+
+</more>
+
+Logic of the example is the same as in the mentioned post#link. There are two input paths. One containing user information: user id, first name, last name, country, city and company. Other one holds user's awesomeness rating in a form of a pair: user id, rating value.
+{code}
+    # user information
+    1,Ozren,Gulan,Serbia,Novi Sad,codecentric
+    2,Petar,Petrovic,Serbia,Belgrade,some.company
+    3,John,Smith,England,London,brits.co
+    4,Linda,Jefferson,USA,New York,ae.com
+    5,Oscar,Hugo,Sweden,Stockholm,swe.co
+    123,Random,Random,Random,Random,Random
+
+    # rating information
+    1,1000
+    2,15
+    3,200
+    4,11
+    5,5
+{/code}
+
+Our MR job reads the inputs line by line and joins the information about users and their awesomeness rating. It filters out all users with rating less than 150 leaving only awesome people in the results.
+I decided not to show full Java code in the post because it is not important. Enough is to know what goes in and what we expect as a result of the job. Those interested in implementation details can find it attached to the page. These are just signatures of mapper and reducer classes - they determine types of input and output data:
+{code}
+    public class AwesomenessRatingMapper extends Mapper<LongWritable, Text, LongWritable, AwesomenessRatingWritable> {
+        // ...
+    }
+
+    public class AwesomenessRatingReducer extends Reducer<LongWritable, AwesomenessRatingWritable, LongWritable, Text> {
+        // ...
+    }
+{/code}
+
+There are three main MRUnit classes that drive our tests: MapDriver, ReduceDriver and MapReduceDriver. They are generic classes whose type paremeters depend on input and output types of mapper, reducer and whole map/reduce job, respectively. This is how we instantiate them:
+{code}
+    AwesomenessRatingMapper mapper = new AwesomenessRatingMapper();
+    MapDriver<LongWritable, Text, LongWritable, AwesomenessRatingWritable> mapDriver = MapDriver.newMapDriver(mapper);
+
+    AwesomenessRatingReducer reducer = new AwesomenessRatingReducer();
+    ReduceDriver<LongWritable, AwesomenessRatingWritable, LongWritable, Text> reduceDriver = ReduceDriver.newReduceDriver(reducer);
+
+    MapReduceDriver<LongWritable, Text, LongWritable, AwesomenessRatingWritable, LongWritable, Text> mapReduceDriver = MapReduceDriver.newMapReduceDriver(mapper, reducer);
+{/code}
+
+MRUnit provides us tools to write tests in different manners. First approach is more traditional one - we specify the input, run the job (or a part of it) and check if the output looks like we expect. In other words, we do the assertions manualy.
+{code}
+    @Test
+    public void testMapperWithManualAssertions() throws Exception {
+        mapDriver.withInput(new LongWritable(0L), TestDataProvider.USER_INFO);
+        mapDriver.withInput(new LongWritable(1L), TestDataProvider.RATING_INFO);
+
+        Pair<LongWritable, AwesomenessRatingWritable> userInfoTuple = new Pair<LongWritable, AwesomenessRatingWritable>(
+                        TestDataProvider.USER_ID, TestDataProvider.USER_INFO_VALUE);
+        Pair<LongWritable, AwesomenessRatingWritable> ratingInfoTuple = new Pair<LongWritable, AwesomenessRatingWritable>(
+                        TestDataProvider.USER_ID, TestDataProvider.RATING_INFO_VALUE);
+
+        List<Pair<LongWritable, AwesomenessRatingWritable>> result = mapDriver.run();
+
+        Assertions.assertThat(result).isNotNull().hasSize(2).contains(userInfoTuple, ratingInfoTuple);
+    }
+
+    // ...
+
+    @Test
+    public void testReducerWithManualAssertions() throws Exception {
+        ImmutableList<AwesomenessRatingWritable> values = ImmutableList.of(TestDataProvider.USER_INFO_VALUE,
+                        TestDataProvider.RATING_INFO_VALUE);
+        ImmutableList<AwesomenessRatingWritable> valuesFilteredOut = ImmutableList.of(
+                        TestDataProvider.USER_INFO_VALUE_FILTERED_OUT, TestDataProvider.RATING_INFO_VALUE_FILTERED_OUT);
+
+        reduceDriver.withInput(TestDataProvider.USER_ID, values);
+        reduceDriver.withInput(TestDataProvider.USER_ID_FILTERED_OUT, valuesFilteredOut);
+
+        Pair<LongWritable, Text> expectedTupple = new Pair<LongWritable, Text>(TestDataProvider.USER_ID,
+                        TestDataProvider.RESULT_TUPPLE_TEXT);
+
+        List<Pair<LongWritable, Text>> result = reduceDriver.run();
+
+        Assertions.assertThat(result).isNotNull().hasSize(1).containsExactly(expectedTupple);
+    }
+
+    // ...
+
+    @Test
+    public void testMapReduceWithManualAssertions() throws Exception {
+        mapReduceDriver.withInput(new LongWritable(0L), TestDataProvider.USER_INFO);
+        mapReduceDriver.withInput(new LongWritable(1L), TestDataProvider.RATING_INFO);
+        mapReduceDriver.withInput(new LongWritable(3L), TestDataProvider.USER_INFO_FILTERED_OUT);
+        mapReduceDriver.withInput(new LongWritable(4L), TestDataProvider.RATING_INFO_FILTERED_OUT);
+
+        Pair<LongWritable, Text> expectedTupple = new Pair<LongWritable, Text>(TestDataProvider.USER_ID,
+                        TestDataProvider.RESULT_TUPPLE_TEXT);
+
+        List<Pair<LongWritable, Text>> result = mapReduceDriver.run();
+
+        Assertions.assertThat(result).isNotNull().hasSize(1).containsExactly(expectedTupple);
+    }
+{/code}
+
+Other approach is to specify input and specify the output, too. In this case, we do not have to do the assertions. Instead, we can let the framework do it.
+{code}
+    @Test
+    public void testMapperWithAutoAssertions() throws Exception {
+        mapDriver.withInput(new LongWritable(0L), TestDataProvider.USER_INFO);
+        mapDriver.withInput(new LongWritable(1L), TestDataProvider.RATING_INFO);
+
+        mapDriver.withOutput(TestDataProvider.USER_ID, TestDataProvider.USER_INFO_VALUE);
+        mapDriver.withOutput(TestDataProvider.USER_ID, TestDataProvider.RATING_INFO_VALUE);
+
+        mapDriver.runTest();
+    }
+
+    // ...
+
+    @Test
+    public void testReducerWithAutoAssertions() throws Exception {
+        ImmutableList<AwesomenessRatingWritable> values = ImmutableList.of(TestDataProvider.USER_INFO_VALUE,
+                        TestDataProvider.RATING_INFO_VALUE);
+        ImmutableList<AwesomenessRatingWritable> valuesFilteredOut = ImmutableList.of(
+                        TestDataProvider.USER_INFO_VALUE_FILTERED_OUT, TestDataProvider.RATING_INFO_VALUE_FILTERED_OUT);
+
+        reduceDriver.withInput(TestDataProvider.USER_ID, values);
+        reduceDriver.withInput(TestDataProvider.USER_ID_FILTERED_OUT, valuesFilteredOut);
+
+        reduceDriver.withOutput(new Pair<LongWritable, Text>(TestDataProvider.USER_ID,
+                        TestDataProvider.RESULT_TUPPLE_TEXT));
+
+        reduceDriver.runTest();
+    }
+
+    // ...
+
+    @Test
+    public void testMapReduceWithAutoAssertions() throws Exception {
+        mapReduceDriver.withInput(new LongWritable(0L), TestDataProvider.USER_INFO);
+        mapReduceDriver.withInput(new LongWritable(1L), TestDataProvider.RATING_INFO);
+        mapReduceDriver.withInput(new LongWritable(3L), TestDataProvider.USER_INFO_FILTERED_OUT);
+        mapReduceDriver.withInput(new LongWritable(4L), TestDataProvider.RATING_INFO_FILTERED_OUT);
+
+        Pair<LongWritable, Text> expectedTupple = new Pair<LongWritable, Text>(TestDataProvider.USER_ID,
+                        TestDataProvider.RESULT_TUPPLE_TEXT);
+        mapReduceDriver.withOutput(expectedTupple);
+
+        mapReduceDriver.runTest();
+    }
+{\code}
+
+The main difference is in calling driver's method run() or runTest(). First one just runs the test without validating the results. Second also adds validation of the results to the execution flow.
+I would like to point out some other useful things MRUnit has:
+- List<Pair<K2,V2>> MapDriver#run() returns a list of pairs which is very useful for testing the situations when mapper produces multiple key/value pairs for given input
+- both MapDriver and ReduceDriver have method getContext() returning appropriate Context for further mocking
+- counters... 
+- setting mock configuration (strangely, via TestDriver#getConfiguration())
+- MapReduceDriver is useful for testing the MR job in whole, checking if map and reduce parts are working properly combined together
+- ...

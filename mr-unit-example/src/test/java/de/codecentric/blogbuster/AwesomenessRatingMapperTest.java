@@ -24,7 +24,7 @@ public class AwesomenessRatingMapperTest {
 
     // testing style: tell the input, assert the output
     @Test
-    public void testWithInput() throws Exception {
+    public void testMapperWithManualAssertions() throws Exception {
         mapDriver.withInput(new LongWritable(0L), TestDataProvider.USER_INFO);
         mapDriver.withInput(new LongWritable(1L), TestDataProvider.RATING_INFO);
 
@@ -40,7 +40,7 @@ public class AwesomenessRatingMapperTest {
 
     // testing style: tell the input and output, let the framework do the assertions
     @Test
-    public void testWithKnownInputAndOutput() throws Exception {
+    public void testMapperWithAutoAssertions() throws Exception {
         mapDriver.withInput(new LongWritable(0L), TestDataProvider.USER_INFO);
         mapDriver.withInput(new LongWritable(1L), TestDataProvider.RATING_INFO);
 

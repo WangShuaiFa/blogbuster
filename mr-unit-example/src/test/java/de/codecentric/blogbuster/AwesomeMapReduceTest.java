@@ -26,9 +26,11 @@ public class AwesomeMapReduceTest {
 
     // testing style: tell the input, assert the output
     @Test
-    public void testWithInput() throws Exception {
+    public void testMapReduceWithManualAssertions() throws Exception {
         mapReduceDriver.withInput(new LongWritable(0L), TestDataProvider.USER_INFO);
         mapReduceDriver.withInput(new LongWritable(1L), TestDataProvider.RATING_INFO);
+        mapReduceDriver.withInput(new LongWritable(3L), TestDataProvider.USER_INFO_FILTERED_OUT);
+        mapReduceDriver.withInput(new LongWritable(4L), TestDataProvider.RATING_INFO_FILTERED_OUT);
 
         Pair<LongWritable, Text> expectedTupple = new Pair<LongWritable, Text>(TestDataProvider.USER_ID,
                         TestDataProvider.RESULT_TUPPLE_TEXT);
@@ -40,9 +42,11 @@ public class AwesomeMapReduceTest {
 
     // testing style: tell the input and output, let the framework do the assertions
     @Test
-    public void testWithKnownInputAndOutput() throws Exception {
+    public void testMapReduceWithAutoAssertions() throws Exception {
         mapReduceDriver.withInput(new LongWritable(0L), TestDataProvider.USER_INFO);
         mapReduceDriver.withInput(new LongWritable(1L), TestDataProvider.RATING_INFO);
+        mapReduceDriver.withInput(new LongWritable(3L), TestDataProvider.USER_INFO_FILTERED_OUT);
+        mapReduceDriver.withInput(new LongWritable(4L), TestDataProvider.RATING_INFO_FILTERED_OUT);
 
         Pair<LongWritable, Text> expectedTupple = new Pair<LongWritable, Text>(TestDataProvider.USER_ID,
                         TestDataProvider.RESULT_TUPPLE_TEXT);
