@@ -18,5 +18,4 @@ generatedRecords = FOREACH filteredRecords GENERATE
 												awesomenessRating::rating AS rating;
 
 -- Store results
---STORE generatedRecords INTO '/results/awesomeness' USING PigStorage();
-DUMP generatedRecords;
+STORE generatedRecords INTO '/results/awesomeness' USING PigStorage();
