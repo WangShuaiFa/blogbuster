@@ -1,0 +1,5 @@
+(1,Ozren,Gulan,Serbia,Novi Sad,PMF,Softversko Inzenjerstvo,1,10.0)
+(2,Petar,Petrovic,Serbia,Novi Sad,FTN,Informacioni Sistemi,2,9.53)
+(3,John,Smith,England,London,Cambridge,IT,3,6.88)
+(4,Milan,Milanovic,Serbia,Beograd,ETF,Informacione Tehnologije,4,7.94)
+(5,Ivana,Ivanovic,Serbia,Novi Sad,PMF,Poslovna Informatika,5,8.66)
