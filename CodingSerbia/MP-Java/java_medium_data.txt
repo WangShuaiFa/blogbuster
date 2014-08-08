@@ -1,0 +1,80 @@
+$ time hadoop jar target/MP-Java-1.0-SNAPSHOT-jar-with-dependencies.jar 
+14/08/07 15:37:32 WARN mapred.JobClient: Use GenericOptionsParser for parsing the arguments. Applications should implement Tool for the same.
+14/08/07 15:37:32 INFO input.FileInputFormat: Total input paths to process : 2
+14/08/07 15:37:32 INFO util.NativeCodeLoader: Loaded the native-hadoop library
+14/08/07 15:37:32 WARN snappy.LoadSnappy: Snappy native library is available
+14/08/07 15:37:32 INFO snappy.LoadSnappy: Snappy native library loaded
+14/08/07 15:37:32 INFO mapred.JobClient: Running job: job_201408041736_0006
+14/08/07 15:37:33 INFO mapred.JobClient:  map 0% reduce 0%
+14/08/07 15:37:48 INFO mapred.JobClient:  map 11% reduce 0%
+14/08/07 15:37:51 INFO mapred.JobClient:  map 19% reduce 0%
+14/08/07 15:37:54 INFO mapred.JobClient:  map 27% reduce 0%
+14/08/07 15:37:57 INFO mapred.JobClient:  map 30% reduce 0%
+14/08/07 15:37:58 INFO mapred.JobClient:  map 33% reduce 0%
+14/08/07 15:38:09 INFO mapred.JobClient:  map 43% reduce 0%
+14/08/07 15:38:12 INFO mapred.JobClient:  map 50% reduce 0%
+14/08/07 15:38:15 INFO mapred.JobClient:  map 58% reduce 0%
+14/08/07 15:38:18 INFO mapred.JobClient:  map 65% reduce 0%
+14/08/07 15:38:21 INFO mapred.JobClient:  map 66% reduce 0%
+14/08/07 15:38:31 INFO mapred.JobClient:  map 68% reduce 0%
+14/08/07 15:38:32 INFO mapred.JobClient:  map 76% reduce 0%
+14/08/07 15:38:34 INFO mapred.JobClient:  map 77% reduce 0%
+14/08/07 15:38:35 INFO mapred.JobClient:  map 82% reduce 0%
+14/08/07 15:38:37 INFO mapred.JobClient:  map 83% reduce 0%
+14/08/07 15:38:38 INFO mapred.JobClient:  map 87% reduce 0%
+14/08/07 15:38:40 INFO mapred.JobClient:  map 89% reduce 0%
+14/08/07 15:38:43 INFO mapred.JobClient:  map 91% reduce 0%
+14/08/07 15:38:46 INFO mapred.JobClient:  map 93% reduce 0%
+14/08/07 15:38:49 INFO mapred.JobClient:  map 95% reduce 0%
+14/08/07 15:38:52 INFO mapred.JobClient:  map 97% reduce 5%
+14/08/07 15:38:55 INFO mapred.JobClient:  map 99% reduce 27%
+14/08/07 15:38:58 INFO mapred.JobClient:  map 100% reduce 27%
+14/08/07 15:39:13 INFO mapred.JobClient:  map 100% reduce 71%
+14/08/07 15:39:16 INFO mapred.JobClient:  map 100% reduce 75%
+14/08/07 15:39:19 INFO mapred.JobClient:  map 100% reduce 80%
+14/08/07 15:39:22 INFO mapred.JobClient:  map 100% reduce 84%
+14/08/07 15:39:25 INFO mapred.JobClient:  map 100% reduce 89%
+14/08/07 15:39:28 INFO mapred.JobClient:  map 100% reduce 93%
+14/08/07 15:39:31 INFO mapred.JobClient:  map 100% reduce 98%
+14/08/07 15:39:34 INFO mapred.JobClient:  map 100% reduce 100%
+14/08/07 15:39:35 INFO mapred.JobClient: Job complete: job_201408041736_0006
+14/08/07 15:39:35 INFO mapred.JobClient: Counters: 32
+14/08/07 15:39:35 INFO mapred.JobClient:   File System Counters
+14/08/07 15:39:35 INFO mapred.JobClient:     FILE: Number of bytes read=435633416
+14/08/07 15:39:35 INFO mapred.JobClient:     FILE: Number of bytes written=653869673
+14/08/07 15:39:35 INFO mapred.JobClient:     FILE: Number of read operations=0
+14/08/07 15:39:35 INFO mapred.JobClient:     FILE: Number of large read operations=0
+14/08/07 15:39:35 INFO mapred.JobClient:     FILE: Number of write operations=0
+14/08/07 15:39:35 INFO mapred.JobClient:     HDFS: Number of bytes read=772670663
+14/08/07 15:39:35 INFO mapred.JobClient:     HDFS: Number of bytes written=175221359
+14/08/07 15:39:35 INFO mapred.JobClient:     HDFS: Number of read operations=12
+14/08/07 15:39:35 INFO mapred.JobClient:     HDFS: Number of large read operations=0
+14/08/07 15:39:35 INFO mapred.JobClient:     HDFS: Number of write operations=1
+14/08/07 15:39:35 INFO mapred.JobClient:   Job Counters 
+14/08/07 15:39:35 INFO mapred.JobClient:     Launched map tasks=6
+14/08/07 15:39:35 INFO mapred.JobClient:     Launched reduce tasks=1
+14/08/07 15:39:35 INFO mapred.JobClient:     Data-local map tasks=6
+14/08/07 15:39:35 INFO mapred.JobClient:     Total time spent by all maps in occupied slots (ms)=147774
+14/08/07 15:39:35 INFO mapred.JobClient:     Total time spent by all reduces in occupied slots (ms)=51509
+14/08/07 15:39:35 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+14/08/07 15:39:35 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+14/08/07 15:39:35 INFO mapred.JobClient:   Map-Reduce Framework
+14/08/07 15:39:35 INFO mapred.JobClient:     Map input records=20000000
+14/08/07 15:39:35 INFO mapred.JobClient:     Map output records=20000000
+14/08/07 15:39:35 INFO mapred.JobClient:     Map output bytes=865818635
+14/08/07 15:39:35 INFO mapred.JobClient:     Input split bytes=1451
+14/08/07 15:39:35 INFO mapred.JobClient:     Combine input records=0
+14/08/07 15:39:35 INFO mapred.JobClient:     Combine output records=0
+14/08/07 15:39:35 INFO mapred.JobClient:     Reduce input groups=10000000
+14/08/07 15:39:35 INFO mapred.JobClient:     Reduce shuffle bytes=217815316
+14/08/07 15:39:35 INFO mapred.JobClient:     Reduce input records=20000000
+14/08/07 15:39:35 INFO mapred.JobClient:     Reduce output records=2991993
+14/08/07 15:39:35 INFO mapred.JobClient:     Spilled Records=60000000
+14/08/07 15:39:35 INFO mapred.JobClient:     CPU time spent (ms)=142040
+14/08/07 15:39:35 INFO mapred.JobClient:     Physical memory (bytes) snapshot=2025058304
+14/08/07 15:39:35 INFO mapred.JobClient:     Virtual memory (bytes) snapshot=8185499648
+14/08/07 15:39:35 INFO mapred.JobClient:     Total committed heap usage (bytes)=1618214912
+
+real	2m4.485s
+user	0m2.424s
+sys	0m0.508s

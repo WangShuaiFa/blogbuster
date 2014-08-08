@@ -1,8 +1,8 @@
 -- Load students from hdfs
-students = LOAD '/some/path/students.txt' USING PigStorage(',') AS (id:long, firstName:chararray, lastName:chararray, country:chararray, city:chararray, university:chararray, course:chararray);
+students = LOAD '/some/path/students_S.txt' USING PigStorage(',') AS (id:long, firstName:chararray, lastName:chararray, country:chararray, city:chararray, university:chararray, course:chararray);
 
 -- Load ratings from hdfs
-rating = LOAD '/some/path/rating.txt' USING PigStorage(',') AS (studentId:long, rating:float);
+rating = LOAD '/some/path/ratings_S.txt' USING PigStorage(',') AS (studentId:long, rating:float);
 
 -- Join records by studentId
 joinedRecords = JOIN students BY id, rating BY studentId;
@@ -19,4 +19,4 @@ generatedRecords = FOREACH filteredRecords GENERATE
 												rating::rating AS rating;
 
 -- Store results
-STORE generatedRecords INTO '/results/ratings_pig' USING PigStorage();
+STORE generatedRecords INTO '/results/ratings_pig_S' USING PigStorage();

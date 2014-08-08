@@ -1,0 +1,112 @@
+2014-08-08 08:59:35,510 [main] INFO  org.apache.pig.Main - Logging error messages to: /mnt/hgfs/work/projects/codecentric/blogbuster/CodingSerbia/MP-Pig/src/main/resources/pig_1407481175507.log
+2014-08-08 08:59:35,742 [main] INFO  org.apache.pig.backend.hadoop.executionengine.HExecutionEngine - Connecting to hadoop file system at: hdfs://ubuntu:8020
+2014-08-08 08:59:35,745 [main] WARN  org.apache.hadoop.conf.Configuration - fs.default.name is deprecated. Instead, use fs.defaultFS
+2014-08-08 08:59:36,525 [main] INFO  org.apache.pig.backend.hadoop.executionengine.HExecutionEngine - Connecting to map-reduce job tracker at: ubuntu:8021
+2014-08-08 08:59:36,527 [main] WARN  org.apache.hadoop.conf.Configuration - fs.default.name is deprecated. Instead, use fs.defaultFS
+2014-08-08 08:59:37,068 [main] INFO  org.apache.pig.tools.pigstats.ScriptState - Pig features used in the script: HASH_JOIN,FILTER
+2014-08-08 08:59:37,105 [main] INFO  org.apache.pig.newplan.logical.rules.ColumnPruneVisitor - Columns pruned for students: $3, $4, $5
+2014-08-08 08:59:37,217 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MRCompiler - File concatenation threshold: 100 optimistic? false
+2014-08-08 08:59:37,256 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MRCompiler$LastInputStreamingOptimizer - Rewrite: POPackage->POForEach to POJoinPackage
+2014-08-08 08:59:37,266 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MultiQueryOptimizer - MR plan size before optimization: 1
+2014-08-08 08:59:37,267 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MultiQueryOptimizer - MR plan size after optimization: 1
+2014-08-08 08:59:37,461 [main] INFO  org.apache.pig.tools.pigstats.ScriptState - Pig script settings are added to the job
+2014-08-08 08:59:37,475 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.JobControlCompiler - mapred.job.reduce.markreset.buffer.percent is not set, set to default 0.3
+2014-08-08 08:59:37,478 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.JobControlCompiler - creating jar file Job7516639994568821493.jar
+2014-08-08 08:59:39,848 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.JobControlCompiler - jar file Job7516639994568821493.jar created
+2014-08-08 08:59:39,859 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.JobControlCompiler - Setting up single store job
+2014-08-08 08:59:39,878 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.JobControlCompiler - BytesPerReducer=1000000000 maxReducers=999 totalInputFileSize=3950999887
+2014-08-08 08:59:39,878 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.JobControlCompiler - Neither PARALLEL nor default parallelism is set for this job. Setting number of reducers to 4
+2014-08-08 08:59:39,952 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - 1 map-reduce job(s) waiting for submission.
+2014-08-08 08:59:39,983 [Thread-3] WARN  org.apache.hadoop.mapred.JobClient - Use GenericOptionsParser for parsing the arguments. Applications should implement Tool for the same.
+2014-08-08 08:59:40,365 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - dfs.df.interval is deprecated. Instead, use fs.df.interval
+2014-08-08 08:59:40,366 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - dfs.max.objects is deprecated. Instead, use dfs.namenode.max.objects
+2014-08-08 08:59:40,366 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - hadoop.native.lib is deprecated. Instead, use io.native.lib.available
+2014-08-08 08:59:40,366 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - dfs.data.dir is deprecated. Instead, use dfs.datanode.data.dir
+2014-08-08 08:59:40,366 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - dfs.name.dir is deprecated. Instead, use dfs.namenode.name.dir
+2014-08-08 08:59:40,366 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - fs.default.name is deprecated. Instead, use fs.defaultFS
+2014-08-08 08:59:40,367 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - fs.checkpoint.dir is deprecated. Instead, use dfs.namenode.checkpoint.dir
+2014-08-08 08:59:40,367 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - dfs.block.size is deprecated. Instead, use dfs.blocksize
+2014-08-08 08:59:40,367 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - dfs.access.time.precision is deprecated. Instead, use dfs.namenode.accesstime.precision
+2014-08-08 08:59:40,367 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - dfs.replication.min is deprecated. Instead, use dfs.namenode.replication.min
+2014-08-08 08:59:40,367 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - dfs.name.edits.dir is deprecated. Instead, use dfs.namenode.edits.dir
+2014-08-08 08:59:40,367 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - dfs.replication.considerLoad is deprecated. Instead, use dfs.namenode.replication.considerLoad
+2014-08-08 08:59:40,367 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - dfs.balance.bandwidthPerSec is deprecated. Instead, use dfs.datanode.balance.bandwidthPerSec
+2014-08-08 08:59:40,367 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - dfs.safemode.threshold.pct is deprecated. Instead, use dfs.namenode.safemode.threshold-pct
+2014-08-08 08:59:40,367 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - dfs.http.address is deprecated. Instead, use dfs.namenode.http-address
+2014-08-08 08:59:40,368 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - dfs.name.dir.restore is deprecated. Instead, use dfs.namenode.name.dir.restore
+2014-08-08 08:59:40,368 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - dfs.https.client.keystore.resource is deprecated. Instead, use dfs.client.https.keystore.resource
+2014-08-08 08:59:40,368 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - dfs.backup.address is deprecated. Instead, use dfs.namenode.backup.address
+2014-08-08 08:59:40,368 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - dfs.backup.http.address is deprecated. Instead, use dfs.namenode.backup.http-address
+2014-08-08 08:59:40,368 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - dfs.permissions is deprecated. Instead, use dfs.permissions.enabled
+2014-08-08 08:59:40,368 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - dfs.safemode.extension is deprecated. Instead, use dfs.namenode.safemode.extension
+2014-08-08 08:59:40,368 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - dfs.datanode.max.xcievers is deprecated. Instead, use dfs.datanode.max.transfer.threads
+2014-08-08 08:59:40,368 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - dfs.https.need.client.auth is deprecated. Instead, use dfs.client.https.need-auth
+2014-08-08 08:59:40,368 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - dfs.https.address is deprecated. Instead, use dfs.namenode.https-address
+2014-08-08 08:59:40,368 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - dfs.replication.interval is deprecated. Instead, use dfs.namenode.replication.interval
+2014-08-08 08:59:40,368 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - fs.checkpoint.edits.dir is deprecated. Instead, use dfs.namenode.checkpoint.edits.dir
+2014-08-08 08:59:40,368 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - dfs.write.packet.size is deprecated. Instead, use dfs.client-write-packet-size
+2014-08-08 08:59:40,368 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - dfs.permissions.supergroup is deprecated. Instead, use dfs.permissions.superusergroup
+2014-08-08 08:59:40,368 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - topology.script.number.args is deprecated. Instead, use net.topology.script.number.args
+2014-08-08 08:59:40,369 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - dfs.secondary.http.address is deprecated. Instead, use dfs.namenode.secondary.http-address
+2014-08-08 08:59:40,369 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - fs.checkpoint.period is deprecated. Instead, use dfs.namenode.checkpoint.period
+2014-08-08 08:59:40,369 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - topology.node.switch.mapping.impl is deprecated. Instead, use net.topology.node.switch.mapping.impl
+2014-08-08 08:59:40,369 [Thread-3] WARN  org.apache.hadoop.conf.Configuration - io.bytes.per.checksum is deprecated. Instead, use dfs.bytes-per-checksum
+2014-08-08 08:59:40,416 [Thread-3] INFO  org.apache.hadoop.mapreduce.lib.input.FileInputFormat - Total input paths to process : 1
+2014-08-08 08:59:40,416 [Thread-3] INFO  org.apache.pig.backend.hadoop.executionengine.util.MapRedUtil - Total input paths to process : 1
+2014-08-08 08:59:40,445 [Thread-3] INFO  org.apache.hadoop.util.NativeCodeLoader - Loaded the native-hadoop library
+2014-08-08 08:59:40,449 [Thread-3] WARN  org.apache.hadoop.io.compress.snappy.LoadSnappy - Snappy native library is available
+2014-08-08 08:59:40,449 [Thread-3] INFO  org.apache.hadoop.io.compress.snappy.LoadSnappy - Snappy native library loaded
+2014-08-08 08:59:40,455 [Thread-3] INFO  org.apache.pig.backend.hadoop.executionengine.util.MapRedUtil - Total input paths (combined) to process : 25
+2014-08-08 08:59:40,457 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - 0% complete
+2014-08-08 08:59:40,464 [Thread-3] INFO  org.apache.hadoop.mapreduce.lib.input.FileInputFormat - Total input paths to process : 1
+2014-08-08 08:59:40,464 [Thread-3] INFO  org.apache.pig.backend.hadoop.executionengine.util.MapRedUtil - Total input paths to process : 1
+2014-08-08 08:59:40,471 [Thread-3] INFO  org.apache.pig.backend.hadoop.executionengine.util.MapRedUtil - Total input paths (combined) to process : 5
+2014-08-08 08:59:41,284 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - HadoopJobId: job_201408041736_0018
+2014-08-08 08:59:41,284 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - More information at: http://ubuntu:50030/jobdetails.jsp?jobid=job_201408041736_0018
+2014-08-08 09:05:26,842 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - 46% complete
+2014-08-08 09:06:22,754 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - 53% complete
+2014-08-08 09:06:27,783 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - 58% complete
+2014-08-08 09:07:32,778 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - 64% complete
+2014-08-08 09:07:35,794 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - 66% complete
+2014-08-08 09:07:38,813 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - 70% complete
+2014-08-08 09:08:47,306 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - 77% complete
+2014-08-08 09:08:50,328 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - 78% complete
+2014-08-08 09:08:56,863 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - 83% complete
+2014-08-08 09:10:03,765 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - 89% complete
+2014-08-08 09:10:07,285 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - 91% complete
+2014-08-08 09:10:10,302 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - 95% complete
+2014-08-08 09:11:11,304 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - 100% complete
+2014-08-08 09:11:11,308 [main] INFO  org.apache.pig.tools.pigstats.SimplePigStats - Script Statistics: 
+
+HadoopVersion	PigVersion	UserId	StartedAt	FinishedAt	Features
+2.0.0-cdh4.0.1	0.9.2-cdh4.0.1	mapred	2014-08-08 08:59:37	2014-08-08 09:11:11	HASH_JOIN,FILTER
+
+Success!
+
+Job Stats (time in seconds):
+JobId	Maps	Reduces	MaxMapTime	MinMapTIme	AvgMapTime	MaxReduceTime	MinReduceTime	AvgReduceTime	Alias	Feature	Outputs
+job_201408041736_0018	30	4	53	11	26	157	74	96	filteredRecords,generatedRecords,joinedRecords,rating,students	HASH_JOIN	/results/ratings_pig_L,
+
+Input(s):
+Successfully read 50000000 records from: "/some/path/students_L.txt"
+Successfully read 50000000 records from: "/some/path/ratings_L.txt"
+
+Output(s):
+Successfully stored 14955856 records (759246905 bytes) in: "/results/ratings_pig_L"
+
+Counters:
+Total records written : 14955856
+Total bytes written : 759246905
+Spillable Memory Manager spill count : 0
+Total bags proactively spilled: 0
+Total records proactively spilled: 0
+
+Job DAG:
+job_201408041736_0018
+
+
+2014-08-08 09:11:11,381 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - Success!
+
+real 11m37.209s
+user 0m8.929s
+sys 0m.832
