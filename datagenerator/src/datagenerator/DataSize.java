@@ -2,7 +2,9 @@ package datagenerator;
 
 public enum DataSize {
 
-    S(100000);
+    S(3);
+
+    // S(100000);
     // M(10000000);
     // L(50000000);
 
