@@ -8,12 +8,12 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.MultipleInputs;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
-import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
+import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
 public class AwesomeMapReduce {
 
     public static void main(String[] args) throws Exception {
-        runJob(new Path("/some/path/users.txt"), new Path("/some/path/rating.txt"), new Path("/some/path/users_output_mr"), new Configuration());
+        runJob(new Path("/some/path/students.txt"), new Path("/some/path/ratings.txt"), new Path("/some/path/students_output_mr"), new Configuration());
     }
 
     protected static void runJob(Path usersPath, Path awesomenessRatingsPath, Path outputPath, Configuration config) throws Exception {
@@ -32,7 +32,7 @@ public class AwesomeMapReduce {
 
         job.setOutputKeyClass(LongWritable.class);
         job.setOutputValueClass(Text.class);
-        job.setOutputFormatClass(SequenceFileOutputFormat.class);
+        job.setOutputFormatClass(TextOutputFormat.class);
 
         FileOutputFormat.setOutputPath(job, outputPath);
 

@@ -4,7 +4,7 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
-import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.FloatWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.Writable;
 
@@ -14,20 +14,23 @@ public class AwesomenessRatingWritable implements Writable {
     private Text lastName;
     private Text country;
     private Text city;
-    private Text company;
-    private LongWritable rating;
+    private Text faculty;
+    private Text department;
+    private FloatWritable rating;
 
     public AwesomenessRatingWritable() {
         firstName = new Text();
         lastName = new Text();
         country = new Text();
         city = new Text();
-        company = new Text();
-        rating = new LongWritable();
+        faculty = new Text();
+        department = new Text();
+        rating = new FloatWritable();
     }
 
     public boolean isUserInformation() {
-        return firstName.toString().length() > 0 || lastName.toString().length() > 0 || country.toString().length() > 0 || city.toString().length() > 0 || company.toString().length() > 0;
+        return firstName.toString().length() > 0 || lastName.toString().length() > 0 || country.toString().length() > 0 || city.toString().length() > 0 || faculty.toString().length() > 0
+                        || department.toString().length() > 0;
     }
 
     @Override
@@ -36,7 +39,8 @@ public class AwesomenessRatingWritable implements Writable {
         lastName.readFields(input);
         country.readFields(input);
         city.readFields(input);
-        company.readFields(input);
+        faculty.readFields(input);
+        department.readFields(input);
         rating.readFields(input);
     }
 
@@ -46,7 +50,8 @@ public class AwesomenessRatingWritable implements Writable {
         lastName.write(output);
         country.write(output);
         city.write(output);
-        company.write(output);
+        faculty.write(output);
+        department.write(output);
         rating.write(output);
     }
 
@@ -82,19 +87,27 @@ public class AwesomenessRatingWritable implements Writable {
         this.city = city;
     }
 
-    public Text getCompany() {
-        return company;
+    public Text getFaculty() {
+        return faculty;
     }
 
-    public void setCompany(Text company) {
-        this.company = company;
+    public void setFaculty(Text faculty) {
+        this.faculty = faculty;
     }
 
-    public LongWritable getRating() {
+    public Text getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Text department) {
+        this.department = department;
+    }
+
+    public FloatWritable getRating() {
         return rating;
     }
 
-    public void setRating(LongWritable rating) {
+    public void setRating(FloatWritable rating) {
         this.rating = rating;
     }
 
@@ -103,10 +116,11 @@ public class AwesomenessRatingWritable implements Writable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((city == null) ? 0 : city.hashCode());
-        result = prime * result + ((company == null) ? 0 : company.hashCode());
+        result = prime * result + ((faculty == null) ? 0 : faculty.hashCode());
         result = prime * result + ((country == null) ? 0 : country.hashCode());
         result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
         result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+        result = prime * result + ((department == null) ? 0 : department.hashCode());
         result = prime * result + ((rating == null) ? 0 : rating.hashCode());
         return result;
     }
@@ -130,11 +144,18 @@ public class AwesomenessRatingWritable implements Writable {
         } else if (!city.equals(other.city)) {
             return false;
         }
-        if (company == null) {
-            if (other.company != null) {
+        if (faculty == null) {
+            if (other.faculty != null) {
                 return false;
             }
-        } else if (!company.equals(other.company)) {
+        } else if (!faculty.equals(other.faculty)) {
+            return false;
+        }
+        if (department == null) {
+            if (other.department != null) {
+                return false;
+            }
+        } else if (!department.equals(other.department)) {
             return false;
         }
         if (country == null) {
@@ -170,7 +191,8 @@ public class AwesomenessRatingWritable implements Writable {
 
     @Override
     public String toString() {
-        return "AwesomenessRatingWritable [name=" + firstName + ", lastName=" + lastName + ", country=" + country + ", city=" + city + ", company=" + company + ", rating=" + rating + "]";
+        return "AwesomenessRatingWritable [name=" + firstName + ", lastName=" + lastName + ", country=" + country + ", city=" + city + ", faculty=" + faculty + ", department=" + department
+                        + ", rating=" + rating + "]";
     }
 
 }

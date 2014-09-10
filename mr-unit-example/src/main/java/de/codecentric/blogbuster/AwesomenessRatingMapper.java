@@ -2,6 +2,7 @@ package de.codecentric.blogbuster;
 
 import java.io.IOException;
 
+import org.apache.hadoop.io.FloatWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
@@ -19,12 +20,12 @@ public class AwesomenessRatingMapper extends Mapper<LongWritable, Text, LongWrit
 
         if (tokens.length == 2) {
             mapAwesomenessRating(tokens, context);
-        } else if (tokens.length == 6) {
-            mapUsers(tokens, context);
+        } else if (tokens.length == 7) {
+            mapStudents(tokens, context);
         }
     }
 
-    private void mapUsers(String[] tokens, Context context) throws IOException, InterruptedException {
+    private void mapStudents(String[] tokens, Context context) throws IOException, InterruptedException {
         LongWritable valueKey = new LongWritable(Long.parseLong(tokens[0]));
 
         AwesomenessRatingWritable writable = new AwesomenessRatingWritable();
@@ -32,7 +33,8 @@ public class AwesomenessRatingMapper extends Mapper<LongWritable, Text, LongWrit
         writable.setLastName(new Text(tokens[2]));
         writable.setCountry(new Text(tokens[3]));
         writable.setCity(new Text(tokens[4]));
-        writable.setCompany(new Text(tokens[5]));
+        writable.setFaculty(new Text(tokens[5]));
+        writable.setDepartment(new Text(tokens[6]));
 
         context.write(valueKey, writable);
     }
@@ -41,7 +43,7 @@ public class AwesomenessRatingMapper extends Mapper<LongWritable, Text, LongWrit
         LongWritable key = new LongWritable(Long.parseLong(tokens[0]));
 
         AwesomenessRatingWritable writable = new AwesomenessRatingWritable();
-        writable.setRating(new LongWritable(Long.parseLong(tokens[1])));
+        writable.setRating(new FloatWritable(Float.parseFloat(tokens[1])));
         context.write(key, writable);
     }
 

@@ -1,0 +1,3 @@
+1,Peter,Gulan,Srbija,Beograd,FTN,Softversko inzenjerstvo
+2,Ozren,Smith,Srbija,Novi Sad,FTN,Softversko inzenjerstvo
+3,Daniel,Novoselic,Srbija,Beograd,PMF,Poslovna informatika
