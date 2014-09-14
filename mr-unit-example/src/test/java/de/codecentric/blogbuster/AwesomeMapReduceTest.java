@@ -10,7 +10,7 @@ import org.fest.assertions.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.codecentric.blogbuster.data.TestDataProvider;
+import de.codecentric.blogbuster.data.AwesomeTestDataProvider;
 
 public class AwesomeMapReduceTest {
 
@@ -27,13 +27,13 @@ public class AwesomeMapReduceTest {
     // testing style: tell the input, assert the output
     @Test
     public void testMapReduceWithManualAssertions() throws Exception {
-        mapReduceDriver.withInput(new LongWritable(0L), TestDataProvider.USER_INFO);
-        mapReduceDriver.withInput(new LongWritable(1L), TestDataProvider.RATING_INFO);
-        mapReduceDriver.withInput(new LongWritable(3L), TestDataProvider.USER_INFO_FILTERED_OUT);
-        mapReduceDriver.withInput(new LongWritable(4L), TestDataProvider.RATING_INFO_FILTERED_OUT);
+        mapReduceDriver.withInput(new LongWritable(0L), AwesomeTestDataProvider.USER_INFO);
+        mapReduceDriver.withInput(new LongWritable(1L), AwesomeTestDataProvider.RATING_INFO);
+        mapReduceDriver.withInput(new LongWritable(3L), AwesomeTestDataProvider.USER_INFO_FILTERED_OUT);
+        mapReduceDriver.withInput(new LongWritable(4L), AwesomeTestDataProvider.RATING_INFO_FILTERED_OUT);
 
-        Pair<LongWritable, Text> expectedTupple = new Pair<LongWritable, Text>(TestDataProvider.USER_ID,
-                        TestDataProvider.RESULT_TUPPLE_TEXT);
+        Pair<LongWritable, Text> expectedTupple = new Pair<LongWritable, Text>(AwesomeTestDataProvider.USER_ID,
+                        AwesomeTestDataProvider.RESULT_TUPPLE_TEXT);
 
         List<Pair<LongWritable, Text>> result = mapReduceDriver.run();
 
@@ -43,13 +43,13 @@ public class AwesomeMapReduceTest {
     // testing style: tell the input and output, let the framework do the assertions
     @Test
     public void testMapReduceWithAutoAssertions() throws Exception {
-        mapReduceDriver.withInput(new LongWritable(0L), TestDataProvider.USER_INFO);
-        mapReduceDriver.withInput(new LongWritable(1L), TestDataProvider.RATING_INFO);
-        mapReduceDriver.withInput(new LongWritable(3L), TestDataProvider.USER_INFO_FILTERED_OUT);
-        mapReduceDriver.withInput(new LongWritable(4L), TestDataProvider.RATING_INFO_FILTERED_OUT);
+        mapReduceDriver.withInput(new LongWritable(0L), AwesomeTestDataProvider.USER_INFO);
+        mapReduceDriver.withInput(new LongWritable(1L), AwesomeTestDataProvider.RATING_INFO);
+        mapReduceDriver.withInput(new LongWritable(3L), AwesomeTestDataProvider.USER_INFO_FILTERED_OUT);
+        mapReduceDriver.withInput(new LongWritable(4L), AwesomeTestDataProvider.RATING_INFO_FILTERED_OUT);
 
-        Pair<LongWritable, Text> expectedTupple = new Pair<LongWritable, Text>(TestDataProvider.USER_ID,
-                        TestDataProvider.RESULT_TUPPLE_TEXT);
+        Pair<LongWritable, Text> expectedTupple = new Pair<LongWritable, Text>(AwesomeTestDataProvider.USER_ID,
+                        AwesomeTestDataProvider.RESULT_TUPPLE_TEXT);
         mapReduceDriver.withOutput(expectedTupple);
 
         mapReduceDriver.runTest();

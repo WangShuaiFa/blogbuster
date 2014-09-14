@@ -6,7 +6,7 @@ import org.apache.hadoop.io.Text;
 
 import de.codecentric.blogbuster.AwesomenessRatingWritable;
 
-public class TestDataProvider {
+public class AwesomeTestDataProvider {
 
     public static final LongWritable USER_ID = new LongWritable(1L);
     public static final LongWritable USER_ID_FILTERED_OUT = new LongWritable(2L);
