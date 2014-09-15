@@ -1,6 +1,5 @@
 package com.codingserbia;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.hadoop.conf.Configuration;
@@ -14,7 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import com.codingserbia.data.JsonTestDataProvider;
+import com.codingserbia.data.CustomerTestDataProvider;
 import com.codingserbia.writable.CustomerSessionWritable;
 
 public class CustomerRecordsMapperTest {
@@ -40,32 +39,13 @@ public class CustomerRecordsMapperTest {
         Context ctx = mapDriver.getContext();
         Mockito.when(ctx.getConfiguration()).thenReturn(config);
 
-        for (int i = 0; i < JsonTestDataProvider.CUSTOMER_RECORDS.length; i++) {
-            mapDriver.withInput(new LongWritable(i), JsonTestDataProvider.CUSTOMER_RECORDS[i]);
+        for (int i = 0; i < CustomerTestDataProvider.CUSTOMER_RECORDS_FOR_MAP_INPUT_ONLY.size(); i++) {
+            mapDriver.withInput(new LongWritable(i), CustomerTestDataProvider.CUSTOMER_RECORDS_FOR_MAP_INPUT_ONLY.get(i));
         }
 
         List<Pair<LongWritable, CustomerSessionWritable>> result = mapDriver.run();
 
-        Assertions.assertThat(result).isNotNull().hasSize(2);
-
-        LongWritable expectedCategoryId = new LongWritable(5L);
-        for (Iterator<Pair<LongWritable, CustomerSessionWritable>> iterator = result.iterator(); iterator.hasNext();) {
-            Pair<LongWritable, CustomerSessionWritable> pair = iterator.next();
-            Assertions.assertThat(expectedCategoryId.equals(pair.getFirst()));
-            Assertions.assertThat(expectedCategoryId.equals(pair.getSecond().categoryId));
-        }
-    }
-
-    // testing style: tell the input and output, let the framework do the assertions
-    @Test
-    public void testMapperWithAutoAssertions() throws Exception {
-        // mapDriver.withInput(new LongWritable(0L), AwesomeTestDataProvider.USER_INFO);
-        // mapDriver.withInput(new LongWritable(1L), AwesomeTestDataProvider.RATING_INFO);
-        //
-        // mapDriver.withOutput(AwesomeTestDataProvider.USER_ID, AwesomeTestDataProvider.USER_INFO_VALUE);
-        // mapDriver.withOutput(AwesomeTestDataProvider.USER_ID, AwesomeTestDataProvider.RATING_INFO_VALUE);
-        //
-        // mapDriver.runTest();
+        Assertions.assertThat(result).isNotNull().hasSize(4);
     }
 
 }

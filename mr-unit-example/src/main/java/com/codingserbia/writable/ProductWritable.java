@@ -10,7 +10,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.Writable;
 
-import com.codingserbia.json.Product;
+import com.codingserbia.dto.Product;
 
 public class ProductWritable implements Writable {
 

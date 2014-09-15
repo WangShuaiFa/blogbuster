@@ -11,7 +11,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
-import com.codingserbia.json.CustomerSession;
+import com.codingserbia.dto.CustomerSession;
 import com.codingserbia.writable.CustomerCategoryWritable;
 import com.codingserbia.writable.CustomerSessionWritable;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,8 +31,6 @@ public class CustomerRecordsMapper extends Mapper<LongWritable, Text, LongWritab
 
         String dimDataPath = context.getConfiguration().get("customer_categories.file.path");
         loadCustomerCategories(dimDataPath);
-        System.out.println("customer categories loaded...");
-        System.out.println(groupedCategories);
     }
 
     @Override
@@ -47,10 +45,7 @@ public class CustomerRecordsMapper extends Mapper<LongWritable, Text, LongWritab
             CustomerSessionWritable session = new CustomerSessionWritable(jsonObj);
 
             LongWritable categoryId = session.categoryId;
-
-            if (groupedCategories.containsKey(categoryId)) {
-                context.write(categoryId, session);
-            }
+            context.write(categoryId, session);
         } catch (Exception e) {
             e.printStackTrace();
         }

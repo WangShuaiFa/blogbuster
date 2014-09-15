@@ -1,4 +1,4 @@
-package com.codingserbia.json;
+package com.codingserbia.dto;
 
 import java.util.ArrayList;
 import java.util.List;

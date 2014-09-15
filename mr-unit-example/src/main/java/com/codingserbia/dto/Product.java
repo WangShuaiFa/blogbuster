@@ -1,5 +1,6 @@
-package com.codingserbia.json;
+package com.codingserbia.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Product {
@@ -18,6 +19,9 @@ public class Product {
 
     @JsonProperty
     public double price;
+
+    @JsonIgnore
+    public int numberOfPurschases;
 
     public Product() {
 

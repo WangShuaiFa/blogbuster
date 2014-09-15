@@ -32,7 +32,7 @@ public class JsonDataGenerator implements Generator {
         try {
             FileWriter jsonFileWriter = new FileWriter("customer_records_" + dataSize.name() + ".json");
 
-            for (int i = 0; i <= dataSize.getSize(); i++) {
+            for (int i = 0; i < dataSize.getSize(); i++) {
                 CustomerSession customerSession = new CustomerSession();
                 customerSession.customerCategoryId = random.nextInt(13) + 1; // avoid zero value
                 customerSession.products = pseudoPickProductsForCustomerSession();

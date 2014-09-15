@@ -7,7 +7,7 @@ import java.io.IOException;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Writable;
 
-import com.codingserbia.json.CustomerSession;
+import com.codingserbia.dto.CustomerSession;
 
 public class CustomerSessionWritable implements Writable {
 
