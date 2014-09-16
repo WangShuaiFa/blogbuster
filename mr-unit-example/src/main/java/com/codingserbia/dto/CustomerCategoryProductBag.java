@@ -81,7 +81,10 @@ public class CustomerCategoryProductBag {
     public List<ProductWritable> getTopProductsBought(int numberOfProducts) {
         List<ProductWritable> topProducts = new ArrayList<ProductWritable>();
 
-        Set<Entry<LongWritable, Long>> entrySet = purchasesByProduct.entrySet();
+        System.out.println(getClass().getSimpleName() + "#getTopProductsBought is currently working on views, not on purchases - test data has to be changed in order to have enough purchases.");
+        // Set<Entry<LongWritable, Long>> entrySet = purchasesByProduct.entrySet();
+        Set<Entry<LongWritable, Long>> entrySet = viewsByProduct.entrySet();
+
         List<Entry<LongWritable, Long>> entries = new ArrayList<Entry<LongWritable, Long>>();
         for (Iterator<Entry<LongWritable, Long>> iterator = entrySet.iterator(); iterator.hasNext();) {
             entries.add(iterator.next());

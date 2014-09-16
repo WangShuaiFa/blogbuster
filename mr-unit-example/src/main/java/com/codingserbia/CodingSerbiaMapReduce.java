@@ -3,6 +3,7 @@ package com.codingserbia;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.MultipleInputs;
@@ -17,6 +18,7 @@ public class CodingSerbiaMapReduce {
     }
 
     protected static void runJob(Path customers, Path outputPath, Configuration config) throws Exception {
+        config.set("mapreduce.output.textoutputformat.separator", "\t");
         Job job = new Job(config);
         job.setJarByClass(CodingSerbiaMapReduce.class);
         job.setJobName("CodingSerbia MapReduce job");
@@ -30,7 +32,7 @@ public class CodingSerbiaMapReduce {
         job.setMapOutputKeyClass(LongWritable.class);
         job.setMapOutputValueClass(Text.class);
 
-        job.setOutputKeyClass(LongWritable.class);
+        job.setOutputKeyClass(NullWritable.class);
         job.setOutputValueClass(Text.class);
         job.setOutputFormatClass(TextOutputFormat.class);
 

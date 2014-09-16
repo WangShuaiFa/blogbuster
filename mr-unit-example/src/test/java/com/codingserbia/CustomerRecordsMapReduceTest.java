@@ -4,7 +4,6 @@ import java.util.List;
 
 import junit.framework.Assert;
 
-import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mrunit.mapreduce.MapReduceDriver;
@@ -20,8 +19,6 @@ public class CustomerRecordsMapReduceTest {
     public static String CUSTOMER_CATEGORIES_FILE_PATH = "file://target/test-classes/input/customer_categories.db";
 
     private MapReduceDriver<LongWritable, Text, LongWritable, CustomerSessionWritable, LongWritable, Text> mapReduceDriver;
-
-    private Configuration config;
 
     @Before
     public void setUp() {
@@ -42,6 +39,7 @@ public class CustomerRecordsMapReduceTest {
         // Pair<LongWritable, Text> expectedTupple = new Pair<LongWritable, Text>(AwesomeTestDataProvider.USER_ID, AwesomeTestDataProvider.RESULT_TUPPLE_TEXT);
 
         List<Pair<LongWritable, Text>> result = mapReduceDriver.run();
+        System.out.println(result);
 
         Assert.fail("To be implemented");
     }

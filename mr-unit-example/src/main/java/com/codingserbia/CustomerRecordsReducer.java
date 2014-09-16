@@ -47,16 +47,23 @@ public class CustomerRecordsReducer extends Reducer<LongWritable, CustomerSessio
             }
         }
 
+        int numberOfTopBoughtProducts = 5;
+
         categoryMap.put(key, aBag);
-        List<ProductWritable> topProducts = aBag.getTopProductsBought(5);
+        List<ProductWritable> topProducts = aBag.getTopProductsBought(numberOfTopBoughtProducts);
 
-        System.out.println(aBag.calculateAverageNumberOfViews());
+        String resultString = key.toString();
+        for (int i = 0; i < numberOfTopBoughtProducts; i++) {
+            if (i < topProducts.size()) {
+                resultString += "," + topProducts.get(i).name;
+            }
+        }
+        resultString += ",";
+        resultString += aBag.calculateAverageNumberOfViews() + ",";
+        resultString += aBag.calculateAverageNumberOfPurchases() + ",";
+        resultString += aBag.calculateAveragePurchase();
 
-        System.out.println(aBag.calculateAverageNumberOfPurchases());
-
-        System.out.println(aBag.calculateAveragePurchase());
-
-        System.out.println("reducer out");
-
+        System.out.println(resultString);
+        context.write(key, new Text(resultString));
     }
 }
