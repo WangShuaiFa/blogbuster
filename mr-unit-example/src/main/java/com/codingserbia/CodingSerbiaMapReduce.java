@@ -17,25 +17,42 @@ public class CodingSerbiaMapReduce {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CodingSerbiaMapReduce.class);
 
+    protected String inputPath = "";
+    protected String outputPath = "";
+
     public static void main(String[] args) throws Exception {
-        if (validateInput(args)) {
-            runJob(new Path("/customer_records.json"), new Path("/customers_output_mr"), new Configuration());
+        CodingSerbiaMapReduce mr = new CodingSerbiaMapReduce();
+
+        if (mr.validateAndParseInput(args)) {
+            mr.runJob(new Configuration());
         }
     }
 
-    private static boolean validateInput(String[] args) {
+    protected boolean validateAndParseInput(String[] args) {
+        if (args == null || args.length < 2) {
+            LOGGER.error("Two arguments are required: path to input data and path to desired output directory.");
+            return false;
+        }
 
-        return false;
+        if (args.length > 2) {
+            LOGGER.error("Too many arguments. Only two arguments are required: path to input data and path to desired output directory.");
+            return false;
+        }
+
+        inputPath = args[0];
+        outputPath = args[1];
+
+        return true;
     }
 
-    private static void runJob(Path customers, Path outputPath, Configuration config) throws Exception {
-        LOGGER.info("test");
+    private void runJob(Configuration config) throws Exception {
         config.set("mapreduce.output.textoutputformat.separator", "\t");
+
         Job job = new Job(config);
         job.setJarByClass(CodingSerbiaMapReduce.class);
         job.setJobName("CodingSerbia MapReduce job");
 
-        MultipleInputs.addInputPath(job, customers, TextInputFormat.class, CustomerRecordsMapper.class);
+        MultipleInputs.addInputPath(job, new Path(inputPath), TextInputFormat.class, CustomerRecordsMapper.class);
 
         job.setReducerClass(CustomerRecordsReducer.class);
 
@@ -46,7 +63,7 @@ public class CodingSerbiaMapReduce {
         job.setOutputValueClass(Text.class);
         job.setOutputFormatClass(TextOutputFormat.class);
 
-        FileOutputFormat.setOutputPath(job, outputPath);
+        FileOutputFormat.setOutputPath(job, new Path(outputPath));
 
         if (!job.waitForCompletion(true)) {
             throw new Exception("CodingSerbia MapReduce job failed.");
