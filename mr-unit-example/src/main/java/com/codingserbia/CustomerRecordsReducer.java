@@ -54,8 +54,9 @@ public class CustomerRecordsReducer extends Reducer<LongWritable, CustomerSessio
 
         String resultString = key.toString();
         for (int i = 0; i < numberOfTopBoughtProducts; i++) {
+            resultString += ",";
             if (i < topProducts.size()) {
-                resultString += "," + topProducts.get(i).name;
+                resultString += topProducts.get(i).name;
             }
         }
         resultString += ",";
@@ -63,7 +64,6 @@ public class CustomerRecordsReducer extends Reducer<LongWritable, CustomerSessio
         resultString += aBag.calculateAverageNumberOfPurchases() + ",";
         resultString += aBag.calculateAveragePurchase();
 
-        System.out.println(resultString);
         context.write(key, new Text(resultString));
     }
 }

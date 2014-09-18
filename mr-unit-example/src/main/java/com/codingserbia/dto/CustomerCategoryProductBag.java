@@ -66,7 +66,11 @@ public class CustomerCategoryProductBag {
     public void processOccurance(ProductWritable product) {
         if (product.bought.get()) {
             Long productNumberOfPurchases = purchasesByProduct.get(product.id);
-            productNumberOfPurchases++;
+            if (productNumberOfPurchases == null) {
+                productNumberOfPurchases = 1L;
+            } else {
+                productNumberOfPurchases++;
+            }
             purchasesByProduct.put(product.id, productNumberOfPurchases);
             numberOfPurchases++;
         }
@@ -81,9 +85,7 @@ public class CustomerCategoryProductBag {
     public List<ProductWritable> getTopProductsBought(int numberOfProducts) {
         List<ProductWritable> topProducts = new ArrayList<ProductWritable>();
 
-        System.out.println(getClass().getSimpleName() + "#getTopProductsBought is currently working on views, not on purchases - test data has to be changed in order to have enough purchases.");
-        // Set<Entry<LongWritable, Long>> entrySet = purchasesByProduct.entrySet();
-        Set<Entry<LongWritable, Long>> entrySet = viewsByProduct.entrySet();
+        Set<Entry<LongWritable, Long>> entrySet = purchasesByProduct.entrySet();
 
         List<Entry<LongWritable, Long>> entries = new ArrayList<Entry<LongWritable, Long>>();
         for (Iterator<Entry<LongWritable, Long>> iterator = entrySet.iterator(); iterator.hasNext();) {

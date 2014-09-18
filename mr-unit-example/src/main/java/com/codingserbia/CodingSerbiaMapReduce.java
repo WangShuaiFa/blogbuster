@@ -23,10 +23,8 @@ public class CodingSerbiaMapReduce {
         job.setJarByClass(CodingSerbiaMapReduce.class);
         job.setJobName("CodingSerbia MapReduce job");
 
-        // MultipleInputs.addInputPath(job, categories, TextInputFormat.class, CustomerCategoriesMapper.class);
         MultipleInputs.addInputPath(job, customers, TextInputFormat.class, CustomerRecordsMapper.class);
 
-        // job.setMapperClass(CustomerCategoriesMapper.class);
         job.setReducerClass(CustomerRecordsReducer.class);
 
         job.setMapOutputKeyClass(LongWritable.class);

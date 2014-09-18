@@ -8,6 +8,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mrunit.mapreduce.MapReduceDriver;
 import org.apache.hadoop.mrunit.types.Pair;
+import org.fest.assertions.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -36,12 +37,14 @@ public class CustomerRecordsMapReduceTest {
             mapReduceDriver.withInput(new LongWritable(i), CustomerTestDataProvider.CUSTOMER_RECORDS_FOR_MAP_REDUCE_INPUT.get(i));
         }
 
-        // Pair<LongWritable, Text> expectedTupple = new Pair<LongWritable, Text>(AwesomeTestDataProvider.USER_ID, AwesomeTestDataProvider.RESULT_TUPPLE_TEXT);
+        Pair<LongWritable, Text> category4Tuple = new Pair<LongWritable, Text>(CustomerTestDataProvider.CATEGORY_4_KEY, CustomerTestDataProvider.CATEGORY_4_MAPREDUCE_OUTPUT);
+        Pair<LongWritable, Text> category5Tuple = new Pair<LongWritable, Text>(CustomerTestDataProvider.CATEGORY_5_KEY, CustomerTestDataProvider.CATEGORY_5_MAPREDUCE_OUTPUT);
+        Pair<LongWritable, Text> category8Tuple = new Pair<LongWritable, Text>(CustomerTestDataProvider.CATEGORY_8_KEY, CustomerTestDataProvider.CATEGORY_8_MAPREDUCE_OUTPUT);
 
         List<Pair<LongWritable, Text>> result = mapReduceDriver.run();
-        System.out.println(result);
 
-        Assert.fail("To be implemented");
+        Assert.assertEquals(3, result.size());
+        Assertions.assertThat(result).contains(category4Tuple, category5Tuple, category8Tuple);
     }
 
 }

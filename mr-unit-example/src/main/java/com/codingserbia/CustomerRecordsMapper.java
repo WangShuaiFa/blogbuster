@@ -20,6 +20,8 @@ public class CustomerRecordsMapper extends Mapper<LongWritable, Text, LongWritab
 
     private Map<LongWritable, CustomerCategoryWritable> groupedCategories;
 
+    private ObjectMapper jsonMapper;
+
     public CustomerRecordsMapper() {
         super();
         groupedCategories = new HashMap<LongWritable, CustomerCategoryWritable>();
@@ -29,17 +31,14 @@ public class CustomerRecordsMapper extends Mapper<LongWritable, Text, LongWritab
     protected void setup(org.apache.hadoop.mapreduce.Mapper.Context context) throws IOException, InterruptedException {
         super.setup(context);
 
+        jsonMapper = new ObjectMapper();
+
         String dimDataPath = context.getConfiguration().get("customer_categories.file.path");
         loadCustomerCategories(dimDataPath);
     }
 
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
-        mapCustomerRecordValue(value, context);
-    }
-
-    private void mapCustomerRecordValue(Text value, Context context) {
-        ObjectMapper jsonMapper = new ObjectMapper();
         try {
             CustomerSession jsonObj = jsonMapper.readValue(value.toString(), CustomerSession.class);
             CustomerSessionWritable session = new CustomerSessionWritable(jsonObj);

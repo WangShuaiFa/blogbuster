@@ -39,13 +39,13 @@ public class CustomerRecordsMapperTest {
         Context ctx = mapDriver.getContext();
         Mockito.when(ctx.getConfiguration()).thenReturn(config);
 
-        for (int i = 0; i < CustomerTestDataProvider.CUSTOMER_RECORDS_FOR_MAP_INPUT_ONLY.size(); i++) {
-            mapDriver.withInput(new LongWritable(i), CustomerTestDataProvider.CUSTOMER_RECORDS_FOR_MAP_INPUT_ONLY.get(i));
+        for (int i = 0; i < CustomerTestDataProvider.CUSTOMER_RECORDS_FOR_MAP_REDUCE_INPUT.size(); i++) {
+            mapDriver.withInput(new LongWritable(i), CustomerTestDataProvider.CUSTOMER_RECORDS_FOR_MAP_REDUCE_INPUT.get(i));
         }
 
         List<Pair<LongWritable, CustomerSessionWritable>> result = mapDriver.run();
 
-        Assertions.assertThat(result).isNotNull().hasSize(4);
+        Assertions.assertThat(result).isNotNull().hasSize(10);
     }
 
 }
