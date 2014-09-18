@@ -10,14 +10,26 @@ import org.apache.hadoop.mapreduce.lib.input.MultipleInputs;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CodingSerbiaMapReduce {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(CodingSerbiaMapReduce.class);
+
     public static void main(String[] args) throws Exception {
-        runJob(new Path("/customer_records.json"), new Path("/customers_output_mr"), new Configuration());
+        if (validateInput(args)) {
+            runJob(new Path("/customer_records.json"), new Path("/customers_output_mr"), new Configuration());
+        }
     }
 
-    protected static void runJob(Path customers, Path outputPath, Configuration config) throws Exception {
+    private static boolean validateInput(String[] args) {
+
+        return false;
+    }
+
+    private static void runJob(Path customers, Path outputPath, Configuration config) throws Exception {
+        LOGGER.info("test");
         config.set("mapreduce.output.textoutputformat.separator", "\t");
         Job job = new Job(config);
         job.setJarByClass(CodingSerbiaMapReduce.class);

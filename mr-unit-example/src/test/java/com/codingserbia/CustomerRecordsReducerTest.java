@@ -13,12 +13,15 @@ import org.junit.Test;
 import com.codingserbia.data.CustomerTestDataProvider;
 import com.codingserbia.writable.CustomerSessionWritable;
 
-public class CustomerRecordsReducerTest {
+public class CustomerRecordsReducerTest extends AbstractMapReduceTest {
 
     private ReduceDriver<LongWritable, CustomerSessionWritable, LongWritable, Text> reduceDriver;
 
+    @Override
     @Before
     public void setUp() {
+        super.setUp();
+
         CustomerRecordsReducer reducer = new CustomerRecordsReducer();
         reduceDriver = ReduceDriver.newReduceDriver(reducer);
     }

@@ -16,7 +16,7 @@ import org.mockito.Mockito;
 import com.codingserbia.data.CustomerTestDataProvider;
 import com.codingserbia.writable.CustomerSessionWritable;
 
-public class CustomerRecordsMapperTest {
+public class CustomerRecordsMapperTest extends AbstractMapReduceTest {
 
     public static String CUSTOMER_CATEGORIES_FILE_PATH = "file://target/test-classes/input/customer_categories.db";
 
@@ -24,8 +24,11 @@ public class CustomerRecordsMapperTest {
 
     private Configuration config;
 
+    @Override
     @Before
     public void setUp() {
+        super.setUp();
+
         config = new Configuration();
         config.set("customer_categories.file.path", CUSTOMER_CATEGORIES_FILE_PATH);
 

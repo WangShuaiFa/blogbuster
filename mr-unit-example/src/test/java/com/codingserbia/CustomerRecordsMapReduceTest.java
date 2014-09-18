@@ -15,14 +15,16 @@ import org.junit.Test;
 import com.codingserbia.data.CustomerTestDataProvider;
 import com.codingserbia.writable.CustomerSessionWritable;
 
-public class CustomerRecordsMapReduceTest {
+public class CustomerRecordsMapReduceTest extends AbstractMapReduceTest {
 
     public static String CUSTOMER_CATEGORIES_FILE_PATH = "file://target/test-classes/input/customer_categories.db";
 
     private MapReduceDriver<LongWritable, Text, LongWritable, CustomerSessionWritable, LongWritable, Text> mapReduceDriver;
 
+    @Override
     @Before
     public void setUp() {
+        super.setUp();
         CustomerRecordsMapper mapper = new CustomerRecordsMapper();
         CustomerRecordsReducer reducer = new CustomerRecordsReducer();
 
