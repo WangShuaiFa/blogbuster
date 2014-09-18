@@ -10,6 +10,8 @@ import java.util.Map;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.codingserbia.dto.CustomerSession;
 import com.codingserbia.writable.CustomerCategoryWritable;
@@ -17,6 +19,8 @@ import com.codingserbia.writable.CustomerSessionWritable;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class CustomerRecordsMapper extends Mapper<LongWritable, Text, LongWritable, CustomerSessionWritable> {
+
+    private static Logger LOGGER = LoggerFactory.getLogger(CustomerRecordsMapper.class);
 
     private Map<LongWritable, CustomerCategoryWritable> groupedCategories;
 
@@ -33,8 +37,8 @@ public class CustomerRecordsMapper extends Mapper<LongWritable, Text, LongWritab
 
         jsonMapper = new ObjectMapper();
 
-        String dimDataPath = context.getConfiguration().get("customer_categories.file.path");
-        loadCustomerCategories(dimDataPath);
+        // String dimDataPath = context.getConfiguration().get("customer_categories.file.path");
+        // loadCustomerCategories(dimDataPath);
     }
 
     @Override
@@ -46,7 +50,7 @@ public class CustomerRecordsMapper extends Mapper<LongWritable, Text, LongWritab
             LongWritable categoryId = session.categoryId;
             context.write(categoryId, session);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage(), e);
         }
     }
 
@@ -64,7 +68,7 @@ public class CustomerRecordsMapper extends Mapper<LongWritable, Text, LongWritab
             }
             br.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage(), e);
         }
     }
 
